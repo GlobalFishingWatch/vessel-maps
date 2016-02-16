@@ -1,5 +1,4 @@
-#name of file is deceiving. 
-#actually per 10^5 square km, averaged over a square 35 degrees on a side. go figure.
+
 
 import numpy as np
 import matplotlib.pyplot as plt
