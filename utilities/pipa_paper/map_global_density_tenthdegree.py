@@ -1,6 +1,3 @@
-#name of file is deceiving. 
-#actually per 10^5 square km, averaged over a square 35 degrees on a side. go figure.
-
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
@@ -21,7 +18,6 @@ def get_area(lat):
     # phi = 90 - latitude
     phi = (lat+.05)*degrees_to_radians #plus 0.5 to get the middle
     lon_degree = math.cos(phi)*69 #miles
-    # return 69*69*2.6
     return  lat_degree*lon_degree* 2.58999 #miles to square km
 
 
@@ -39,6 +35,7 @@ test_array = np.zeros(shape=(3600))
 test_array2 = np.zeros(shape=(3600))
 
 
+=
 with open(sourcedir + filename,'rU') as f:
     reader = csv.DictReader(f, delimiter=',')
     for row in reader:
@@ -50,13 +47,8 @@ with open(sourcedir + filename,'rU') as f:
             days = float(row['number'])
 
             area = get_area(lat-90) # area of 1 by 1 degree at a given lat
-            vessel_days[lat_index][lon_index] = days / (365* area*.1*.1) * 100000. #vessels per day per 10^5 square km
-            if float(row['lat_bin']) > 30 or float(row['lat_bin']) < 35:
-                test_array[lon_index] += vessel_days[lat_index][lon_index]
-                test_array2[lon_index] += days
 
-for i in range(500):
-    print i, "\t",test_array[i], "\t", test_array2[i]
+            vessel_days[lat_index][lon_index] = days / (365* area*.1*.1) *100000 #vessels per day per 10^5 square km
 
 
 
@@ -140,6 +132,7 @@ fig = plt.figure()
 m = Basemap(llcrnrlat=lastlat, urcrnrlat=firstlat,
           llcrnrlon=firstlon, urcrnrlon=lastlon, lat_ts=0, projection='mill',resolution="h")
 
+
 m.drawmapboundary()
 #     m.drawcoastlines(linewidth=.2)
 m.fillcontinents('#555555')#, lake_color, ax, zorder, alpha)
@@ -190,8 +183,5 @@ cb.set_label('Vessels per day per 10^5 km^2',labelpad=-40, y=0.45)
 
 # plt.show()
 plt.savefig("vessel_density_2015_first_b_t.png",bbox_inches='tight',dpi=450,transparent=True,pad_inches=0)
-
-plt.clf()
-
 
 
