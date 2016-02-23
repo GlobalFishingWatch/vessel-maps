@@ -15,39 +15,22 @@ out_folder = "../../data/pipa_v2/"
 
 mmsi_1a = []
 mmsi_1b = []
-mmsi_2 = []
+mmsi_s8 = []
 mmsi_s2 = []
 
 with open('mmsi_list_v2.csv','rU') as f:
     reader = csv.DictReader(f, delimiter=',')
     for row in reader:
-        mmsi = row['MMSI']
+        mmsi = row['mmsi']
         if row['Fig 1A']:
             mmsi_1a.append(mmsi)
         if row['Fig 1B']:
             mmsi_1b.append(mmsi)
-        if row['Fig S2']:
-            mmsi_2.append(mmsi)
         if row['Fig S8']:
+            mmsi_s8.append(mmsi)
+        if row['Fig S2']:
             mmsi_s2.append(mmsi)
 
-
-
-def write_asc(out_file_name,grid):
-    f = open(out_file_name, "w")
-    f.write("ncols "+str(ncols)+"\n")
-    f.write("nrows "+str(nrows)+"\n")
-    f.write("xllcorner "+str(xllcorner)+"\n")
-    f.write("yllcorner "+str(yllcorner)+"\n")
-    f.write("cellsize "+str(cellsize)+"\n")
-    f.write("no_data_value -9999\n")
-    for r in np.flipud(grid):
-        s = ""
-        for c in r:
-            s+=str(int(c))+" "
-        s = s[:-1]+"\n"
-        f.write(s)
-    f.close()
 
 
 def query_bigquery(query_data, out_file_name, cellsize):
@@ -75,32 +58,47 @@ def query_bigquery(query_data, out_file_name, cellsize):
         print('Error: {}'.format(err.content))
         raise err
 
-    try:
+    if 1:
         if len(lats) == 0:
             print "no values for ", mmsi
             return
 
-        #print max(lats), min(lats), max(lons), min(lons)
-        global ncols
-        ncols = (max(lons)-min(lons))/cellsize + 1
-        global nrows 
-        nrows = (max(lats)-min(lats))/cellsize + 1
+
         global xllcorner
-        xllcorner = min(lons)
         global yllcorner
-        yllcorner = min(lats)
+        global ncols
+        global nrows 
+
+        if cellsize == .25:
+            ncols = (178-167)*4
+            nrows = -(- 8 - 0.5)*4
+            yllcorner = -8
+            xllcorner = -178
+            c_inverse = 4
+
+        if cellsize == 1:
+            ncols = (30+(180-73))
+            nrows = (15+15)
+            yllcorner = -15
+            xllcorner = -210
+            c_inverse = 1
+
         grid = np.zeros((nrows,ncols))
 
         #print ncols, nrows, xllcorner, yllcorner
 
         for v in values:
-            r = int(float(v['bucket_lat'])/cellsize-yllcorner/cellsize)
-            c = int(float(v['bucket_lon'])/cellsize-xllcorner/cellsize)
-            grid[r,c] = int(v['count'])
+            lon = int(v['bucket_lon'])
+            if lon > 0:
+                lon = lon - 360
+            r = int(v['bucket_lat'])-yllcorner*c_inverse
+            c = lon - xllcorner/cellsize
+            print r, v['bucket_lat'], c, lon
+            grid[r][c] = int(v['count'])
 
-        write_asc(out_file_name,grid)
-        return grid
-    except:
+        np.flipud(grid).dump(open(out_file_name.replace(".asc",".npy"), 'wb'))
+
+    else:
         print "fail!" , mmsi
 
 
@@ -111,84 +109,86 @@ credentials = GoogleCredentials.get_application_default()
 # Construct the service object for interacting with the BigQuery API.
 bigquery_service = build('bigquery', 'v2', credentials=credentials)
 
-for mmsi in mmsi_1a:
-    print mmsi
-    query = {  'query': ('''SELECT
-      bucket_lon,
-      bucket_lat,
-      COUNT(*) count
-    FROM (
-      SELECT
-        FLOOR(FIRST(lat)*4)/4 AS bucket_lat,
-        FLOOR(FIRST(lon)* 4)/4 AS bucket_lon
-      FROM
-        [PIPA_Policy_Paper.PIPA_fig_1A]
-      WHERE mmsi = '''+mmsi +'''
-      and local_day >= timestamp("2014-07-01 00:00:00")
-      and local_day < timestamp("2015-01-01 00:00:00")
-      GROUP BY
-        mmsi,
-        local_day)
-    GROUP BY
-      bucket_lat,
-      bucket_lon''') }
+# for mmsi in mmsi_1a:
+#     print mmsi
+#     query = {  'query': ('''SELECT
+#       bucket_lon,
+#       bucket_lat,
+#       COUNT(*) count
+#     FROM (
+#       SELECT
+#         integer(FLOOR(FIRST(lat)*4)) AS bucket_lat,
+#         integer(FLOOR(FIRST(lon)* 4)) AS bucket_lon
+#       FROM
+#         [PIPA_Policy_Paper.PIPA_fig_1A]
+#       WHERE mmsi = '''+mmsi +'''
+#       and local_day >= timestamp("2014-07-01 00:00:00")
+#       and local_day < timestamp("2015-01-01 00:00:00")
+#       and lat<.5
+#       GROUP BY
+#         mmsi,
+#         local_day)
+#     GROUP BY
+#       bucket_lat,
+#       bucket_lon''') }
 
-    fc_score = query_bigquery(query, out_folder+"1a/"+mmsi+".asc", cellsize)
-
-
-print "mmsi_1b"
-
-for mmsi in mmsi_1b:
-    print mmsi
-    query = {  'query': ('''SELECT
-      bucket_lon,
-      bucket_lat,
-      COUNT(*) count
-    FROM (
-      SELECT
-        FLOOR(FIRST(lat)*4)/4 AS bucket_lat,
-        FLOOR(FIRST(lon)* 4)/4 AS bucket_lon
-      FROM
-        [PIPA_Policy_Paper.PIPA_fig_1B]
-      WHERE mmsi = '''+mmsi +'''
-      and local_day >= timestamp("2015-01-01 00:00:00")
-      and local_day < timestamp("2015-07-01 00:00:00")
-      GROUP BY
-        mmsi,
-        local_day)
-    GROUP BY
-      bucket_lat,
-      bucket_lon''') }
-
-    fc_score = query_bigquery(query, out_folder+"1b/"+mmsi+".asc", cellsize)
+#     query_bigquery(query, out_folder+"1a/"+mmsi+".asc", cellsize)
 
 
+# print "mmsi_1b"
 
-print "going to mmsi_2"
-cellsize = 1
+# for mmsi in mmsi_1b:
+#     print mmsi
+#     query = {  'query': ('''SELECT
+#       bucket_lon,
+#       bucket_lat,
+#       COUNT(*) count
+#     FROM (
+#       SELECT
+#         integer(FLOOR(FIRST(lat)*4)) AS bucket_lat,
+#         integer(FLOOR(FIRST(lon)*4)) AS bucket_lon
+#       FROM
+#         [PIPA_Policy_Paper.PIPA_fig_1B]
+#       WHERE mmsi = '''+mmsi +'''
+#       and local_day >= timestamp("2015-01-01 00:00:00")
+#       and local_day < timestamp("2015-07-01 00:00:00")
+#       and lat<.5
+#       GROUP BY
+#         mmsi,
+#         local_day)
+#     GROUP BY
+#       bucket_lat,
+#       bucket_lon''') }
 
-for mmsi in mmsi_2:
-    print mmsi, 
-    query = {  'query': ('''SELECT
-  bucket_lon,
-  bucket_lat,
-  COUNT(*)
-FROM (
-  SELECT
-    FLOOR(first(lat)) AS bucket_lat,
-    FLOOR(first (lon)) AS bucket_lon
-  FROM
-    [PIPA_Policy_Paper.Tropical_Pacific_Purse_Seine_2014_Aug_29_2015]
-  WHERE
-    eez IS NULL 
-    and mmsi = '''+mmsi+'''
-    group by mmsi, local_day)
-GROUP BY
-  bucket_lat,
-  bucket_lon
-      ''') }
+#     query_bigquery(query, out_folder+"1b/"+mmsi+".asc", cellsize)
 
-    fc_score = query_bigquery(query, out_folder+"2/"+mmsi+".asc", cellsize)
+
+
+# print "going to mmsi_2"
+# cellsize = 1
+
+# for mmsi in mmsi_s8:
+#     print mmsi, 
+#     query = {  'query': ('''SELECT
+#   bucket_lon,
+#   bucket_lat,
+#   COUNT(*)
+# FROM (
+#   SELECT
+#     integer(FLOOR(first(lat))) AS bucket_lat,
+#     integer(FLOOR(first (lon))) AS bucket_lon
+#   FROM
+#     [PIPA_Policy_Paper.Tropical_Pacific_Purse_Seine_2014_Aug_29_2015]
+#   WHERE
+#     eez IS NULL 
+#     and mmsi = '''+mmsi+'''
+#     group by mmsi, local_day)
+# GROUP BY
+#   bucket_lat,
+#   bucket_lon
+#       ''') }
+
+#     query_bigquery(query, out_folder+"s8/"+mmsi+".asc", cellsize)
 
 
 
@@ -204,13 +204,14 @@ for mmsi in mmsi_s2:
       COUNT(*) count
     FROM (
       SELECT
-        FLOOR(FIRST(lat)*4)/4 AS bucket_lat,
-        FLOOR(FIRST(lon)* 4)/4 AS bucket_lon
+        integer(FLOOR(FIRST(lat)*4)) AS bucket_lat,
+        integer(FLOOR(FIRST(lon)*4)) AS bucket_lon
       FROM
         [PIPA_Policy_Paper.PIPA_fig_S2]
       WHERE mmsi = '''+mmsi +'''
       and local_day >= timestamp("2014-01-01 00:00:00")
       and local_day < timestamp("2014-07-01 00:00:00")
+      and lat<.5
       GROUP BY
         mmsi,
         local_day)
@@ -218,7 +219,7 @@ for mmsi in mmsi_s2:
       bucket_lat,
       bucket_lon''') }
 
-    fc_score = query_bigquery(query, out_folder+"s2/"+mmsi+".asc", cellsize)
+    query_bigquery(query, out_folder+"s2/"+mmsi+".asc", cellsize)
 
 
 

@@ -1,3 +1,0 @@
-apiclient
-oauth2client
-uritemplate
