@@ -44,7 +44,7 @@ def create_tifs(extra, cellsize):
 
     for f in onlyfiles:
         if ".npy" in f:
-            grid = np.load(source_dir + extra+ f)
+            grid = np.load(source_dir + extra+ f).astype(profile['dtype'])
             out_tif = out_dir + extra + f.replace('.npy',".tif")
             with rio.open(out_tif, 'w', **profile) as dst:
                 dst.write(grid, indexes=1)
