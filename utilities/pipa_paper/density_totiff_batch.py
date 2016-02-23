@@ -33,8 +33,8 @@ def create_tifs(extra, cellsize):
 
     profile = {
         'crs': 'EPSG:4326',
-        'nodata': -9999,
-        'dtype': rio.float64,
+        'nodata': None,
+        'dtype': rio.uint8,
         'height': nrows,
         'width': ncols,
         'count': 1,
