@@ -7,9 +7,7 @@ import affine
 
 
 source_dir = "../../data/pipa_v2/"
-infile = "1a/224523000.npy"
 out_dir = "../../data/pipa/"
-
 
 def create_tifs(extra, cellsize):
 
@@ -50,7 +48,6 @@ def create_tifs(extra, cellsize):
             out_tif = out_dir + extra + f.replace('.npy',".tif")
             with rio.open(out_tif, 'w', **profile) as dst:
                 dst.write(grid, indexes=1)
-
 
 
 create_tifs("1a/", .25)
