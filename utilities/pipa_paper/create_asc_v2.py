@@ -63,7 +63,6 @@ def query_bigquery(query_data, out_file_name, cellsize):
             print "no values for ", mmsi
             return
 
-
         global xllcorner
         global yllcorner
         global ncols
@@ -109,86 +108,86 @@ credentials = GoogleCredentials.get_application_default()
 # Construct the service object for interacting with the BigQuery API.
 bigquery_service = build('bigquery', 'v2', credentials=credentials)
 
-# for mmsi in mmsi_1a:
-#     print mmsi
-#     query = {  'query': ('''SELECT
-#       bucket_lon,
-#       bucket_lat,
-#       COUNT(*) count
-#     FROM (
-#       SELECT
-#         integer(FLOOR(FIRST(lat)*4)) AS bucket_lat,
-#         integer(FLOOR(FIRST(lon)* 4)) AS bucket_lon
-#       FROM
-#         [PIPA_Policy_Paper.PIPA_fig_1A]
-#       WHERE mmsi = '''+mmsi +'''
-#       and local_day >= timestamp("2014-07-01 00:00:00")
-#       and local_day < timestamp("2015-01-01 00:00:00")
-#       and lat<.5
-#       GROUP BY
-#         mmsi,
-#         local_day)
-#     GROUP BY
-#       bucket_lat,
-#       bucket_lon''') }
+for mmsi in mmsi_1a:
+    print mmsi
+    query = {  'query': ('''SELECT
+      bucket_lon,
+      bucket_lat,
+      COUNT(*) count
+    FROM (
+      SELECT
+        integer(FLOOR(FIRST(lat)*4)) AS bucket_lat,
+        integer(FLOOR(FIRST(lon)* 4)) AS bucket_lon
+      FROM
+        [PIPA_Policy_Paper.PIPA_fig_1A]
+      WHERE mmsi = '''+mmsi +'''
+      and timestamp >= timestamp("2014-07-01 00:00:00")
+      and timestamp < timestamp("2015-01-01 00:00:00")
+      and lat<.5
+      GROUP BY
+        mmsi,
+        local_day)
+    GROUP BY
+      bucket_lat,
+      bucket_lon''') }
 
-#     query_bigquery(query, out_folder+"1a/"+mmsi+".asc", cellsize)
-
-
-# print "mmsi_1b"
-
-# for mmsi in mmsi_1b:
-#     print mmsi
-#     query = {  'query': ('''SELECT
-#       bucket_lon,
-#       bucket_lat,
-#       COUNT(*) count
-#     FROM (
-#       SELECT
-#         integer(FLOOR(FIRST(lat)*4)) AS bucket_lat,
-#         integer(FLOOR(FIRST(lon)*4)) AS bucket_lon
-#       FROM
-#         [PIPA_Policy_Paper.PIPA_fig_1B]
-#       WHERE mmsi = '''+mmsi +'''
-#       and local_day >= timestamp("2015-01-01 00:00:00")
-#       and local_day < timestamp("2015-07-01 00:00:00")
-#       and lat<.5
-#       GROUP BY
-#         mmsi,
-#         local_day)
-#     GROUP BY
-#       bucket_lat,
-#       bucket_lon''') }
-
-#     query_bigquery(query, out_folder+"1b/"+mmsi+".asc", cellsize)
+    query_bigquery(query, out_folder+"1a/"+mmsi+".asc", cellsize)
 
 
+print "mmsi_1b"
 
-# print "going to mmsi_2"
-# cellsize = 1
+for mmsi in mmsi_1b:
+    print mmsi
+    query = {  'query': ('''SELECT
+      bucket_lon,
+      bucket_lat,
+      COUNT(*) count
+    FROM (
+      SELECT
+        integer(FLOOR(FIRST(lat)*4)) AS bucket_lat,
+        integer(FLOOR(FIRST(lon)*4)) AS bucket_lon
+      FROM
+        [PIPA_Policy_Paper.PIPA_fig_1B]
+      WHERE mmsi = '''+mmsi +'''
+      and timestamp >= timestamp("2015-01-01 00:00:00")
+      and timestamp < timestamp("2015-07-01 00:00:00")
+      and lat<.5
+      GROUP BY
+        mmsi,
+        local_day)
+    GROUP BY
+      bucket_lat,
+      bucket_lon''') }
 
-# for mmsi in mmsi_s8:
-#     print mmsi, 
-#     query = {  'query': ('''SELECT
-#   bucket_lon,
-#   bucket_lat,
-#   COUNT(*)
-# FROM (
-#   SELECT
-#     integer(FLOOR(first(lat))) AS bucket_lat,
-#     integer(FLOOR(first (lon))) AS bucket_lon
-#   FROM
-#     [PIPA_Policy_Paper.Tropical_Pacific_Purse_Seine_2014_Aug_29_2015]
-#   WHERE
-#     eez IS NULL 
-#     and mmsi = '''+mmsi+'''
-#     group by mmsi, local_day)
-# GROUP BY
-#   bucket_lat,
-#   bucket_lon
-#       ''') }
+    query_bigquery(query, out_folder+"1b/"+mmsi+".asc", cellsize)
 
-#     query_bigquery(query, out_folder+"s8/"+mmsi+".asc", cellsize)
+
+
+print "going to mmsi_2"
+cellsize = 1
+
+for mmsi in mmsi_s8:
+    print mmsi, 
+    query = {  'query': ('''SELECT
+  bucket_lon,
+  bucket_lat,
+  COUNT(*)
+FROM (
+  SELECT
+    integer(FLOOR(first(lat))) AS bucket_lat,
+    integer(FLOOR(first (lon))) AS bucket_lon
+  FROM
+    [PIPA_Policy_Paper.Tropical_Pacific_Purse_Seine_2014_Aug_29_2015]
+  WHERE
+    eez IS NULL 
+    and mmsi = '''+mmsi+'''
+    group by mmsi, local_day)
+GROUP BY
+  bucket_lat,
+  bucket_lon
+      ''') }
+
+    query_bigquery(query, out_folder+"s8/"+mmsi+".asc", cellsize)
 
 
 
@@ -209,8 +208,8 @@ for mmsi in mmsi_s2:
       FROM
         [PIPA_Policy_Paper.PIPA_fig_S2]
       WHERE mmsi = '''+mmsi +'''
-      and local_day >= timestamp("2014-01-01 00:00:00")
-      and local_day < timestamp("2014-07-01 00:00:00")
+      and timestamp >= timestamp("2014-01-01 00:00:00")
+      and timestamp < timestamp("2014-07-01 00:00:00")
       and lat<.5
       GROUP BY
         mmsi,
