@@ -1,0 +1,4 @@
+bq -q cp -f scratch_bjorn.2015_combined_fishing ucsb-gfw:vessel_lists.2015_combined_fishing
+bq -q cp -f scratch_roan.country_code ucsb-gfw:vessel_lists.country_code
+bq -q cp -f scratch_global_fishing_raster.2015_with_score_and_hours ucsb-gfw:fishing_hours.2015_with_score_and_hours
+bq -q cp -f Registry_matching_sources.CLAV_12_14_2015 ucsb-gfw:vessel_lists.CLAV_12_14_2015 
