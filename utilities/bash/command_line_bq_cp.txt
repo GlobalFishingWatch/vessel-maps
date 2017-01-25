@@ -2,3 +2,106 @@ bq -q cp -f scratch_bjorn.2015_combined_fishing ucsb-gfw:vessel_lists.2015_combi
 bq -q cp -f scratch_roan.country_code ucsb-gfw:vessel_lists.country_code
 bq -q cp -f scratch_global_fishing_raster.2015_with_score_and_hours ucsb-gfw:fishing_hours.2015_with_score_and_hours
 bq -q cp -f Registry_matching_sources.CLAV_12_14_2015 ucsb-gfw:vessel_lists.CLAV_12_14_2015 
+bq -q cp -f Registry_matching_sources.CCAMLR_July_2015_with_mmsi ucsb-gfw:vessel_lists.CCAMLR_July_2015_with_mmsi
+bq -q cp -f CLAV_match_results.v7_results ucsb-gfw:vessel_lists.CLAV_v7_results
+bq -q cp -f EU_match_results.EU_v2 ucsb-gfw:vessel_lists.EU_v2
+bq -q cp -f scratch_global_fishing_raster.2015_with_score_and_hours_fishing ucsb-gfw:fishing_hours.2015_with_score_and_hours_fishing
+bq -q cp -f scratch_global_fishing_raster.classification_results_20160506 ucsb-gfw:vessel_lists.classification_results_20160506
+bq -q cp -f scratch_david_seg_analysis.spoofing_hours_2015 ucsb-gfw:vessel_lists.spoofing_hours_2015 
+bq -q cp -f Registry_matching_sources.EU_registry_311215  ucsb-gfw:vessel_lists.EU_registry_311215
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2012  ucsb-gfw:vessel_lists.known_likely_fishing_mmsis_2012
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2013  ucsb-gfw:vessel_lists.known_likely_fishing_mmsis_2013
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2014  ucsb-gfw:vessel_lists.known_likely_fishing_mmsis_2014
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2015  ucsb-gfw:vessel_lists.known_likely_fishing_mmsis_2015
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2016  ucsb-gfw:vessel_lists.known_likely_fishing_mmsis_2016
+bq -q cp -f scratch_david.2012_FAO_FishingRegions  ucsb-gfw:fao.2012_FAO_FishingRegions
+bq -q cp -f scratch_david.2013_FAO_FishingRegions  ucsb-gfw:fao.2013_FAO_FishingRegions
+bq -q cp -f scratch_david.2014_FAO_FishingRegions  ucsb-gfw:fao.2014_FAO_FishingRegions
+bq -q cp -f scratch_david.2015_FAO_FishingRegions  ucsb-gfw:fao.2015_FAO_FishingRegions
+bq -q cp -f scratch_david.2016_FAO_FishingRegions  ucsb-gfw:fao.2016_FAO_FishingRegions
+bq -q cp -f scratch_david_seg_analysis_715.2012_segments  ucsb-gfw:segment_analysis.2012_segments
+bq -q cp -f scratch_david_seg_analysis_715.2013_segments  ucsb-gfw:segment_analysis.2013_segments
+bq -q cp -f scratch_david_seg_analysis_715.2014_segments  ucsb-gfw:segment_analysis.2014_segments
+bq -q cp -f scratch_david_seg_analysis_715.2015_segments  ucsb-gfw:segment_analysis.2015_segments
+bq -q cp -f scratch_david_seg_analysis_715.2016_segments  ucsb-gfw:segment_analysis.2016_segments
+bq -q cp -f scratch_david.country_codes  ucsb-gfw:vessel_lists.country_code
+bq -q cp -f scratch_david.eez_country_codes  ucsb-gfw:vessel_lists.eez_country_codes
+bq -q cp -f scratch_david.eez_country_codes  ucsb-gfw:vessel_lists.eez_country_codes
+bq -q cp -f scratch_david_mmsi_lists.2015_fishing_vessel_info_v2 ucsb-gfw:vessel_lists.2015_fishing_vessel_info_v2
+bq -q cp -f scratch_global_fishing_raster.classifciation_results_all_20170722 ucsb-gfw:vessel_lists.classifciation_results_all_20170722
+bq -q cp -f world-fishing-827:Registry_matching_sources.EU_registry_170316 ucsb-gfw:vessel_lists.EU_registry_170316 
+bq -q cp -f world-fishing-827:Registry_matching_sources.FFA_11_30_2015 ucsb-gfw:vessel_lists.FFA_11_30_2015
+bq -q cp -f world-fishing-827:Registry_matching_sources.ITU_Dec_2015_Fishing ucsb-gfw:vessel_lists.ITU_Dec_2015_Fishing
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2015_all_fishing_v3 ucsb-gfw:vessel_lists.2015_all_fishing_v3
+bq -q cp -f world-fishing-827:scratch_bjorn.Indonesia_VMS_Aug_12_datatypes ucsb-gfw:vms.Indonesia_VMS_Aug_12_datatypes
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2015_all_fishing_v5 ucsb-gfw:vessel_lists.2015_all_fishing_v5
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.nn_labels_20161123 ucsb-gfw:vessel_lists.classification_results_20161123
+
+
+
+
+bq -q cp -f scratch_bjorn.2015_combined_fishing frz-watch-program:vessel_lists.2015_combined_fishing
+bq -q cp -f scratch_roan.country_code frz-watch-program:vessel_lists.country_code
+bq -q cp -f scratch_global_fishing_raster.2015_with_score_and_hours frz-watch-program:fishing_hours.2015_with_score_and_hours
+bq -q cp -f scratch_global_fishing_raster.2015_with_score_and_hours_fishing frz-watch-program:fishing_hours.2015_with_score_and_hours_fishing
+bq -q cp -f Registry_matching_sources.CLAV_12_14_2015 frz-watch-program:vessel_lists.CLAV_12_14_2015 
+bq -q cp -f Registry_matching_sources.CCAMLR_July_2015_with_mmsi frz-watch-program:vessel_lists.CCAMLR_July_2015_with_mmsi
+bq -q cp -f CLAV_match_results.v7_results frz-watch-program:vessel_lists.CLAV_v7_results
+bq -q cp -f EU_match_results.EU_v2 frz-watch-program:vessel_lists.EU_v2
+bq -q cp -f scratch_global_fishing_raster.classification_results_20160506 frz-watch-program:vessel_lists.classification_results_20160506
+bq -q cp -f scratch_david_seg_analysis.spoofing_hours_2015 frz-watch-program:vessel_lists.spoofing_hours_2015 
+bq -q cp -f Registry_matching_sources.EU_registry_311215 frz-watch-program:vessel_lists.EU_registry_311215 
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2012  frz-watch-program:vessel_lists.known_likely_fishing_mmsis_2012
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2013  frz-watch-program:vessel_lists.known_likely_fishing_mmsis_2013
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2014  frz-watch-program:vessel_lists.known_likely_fishing_mmsis_2014
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2015  frz-watch-program:vessel_lists.known_likely_fishing_mmsis_2015
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2016  frz-watch-program:vessel_lists.known_likely_fishing_mmsis_2016
+bq -q cp -f scratch_david_seg_analysis_715.2012_segments  frz-watch-program:segment_analysis.2012_segments
+bq -q cp -f scratch_david_seg_analysis_715.2013_segments  frz-watch-program:segment_analysis.2013_segments
+bq -q cp -f scratch_david_seg_analysis_715.2014_segments  frz-watch-program:segment_analysis.2014_segments
+bq -q cp -f scratch_david_seg_analysis_715.2015_segments  frz-watch-program:segment_analysis.2015_segments
+bq -q cp -f scratch_david_seg_analysis_715.2016_segments  frz-watch-program:segment_analysis.2016_segments
+bq -q cp -f scratch_david.country_codes  frz-watch-program:vessel_lists.country_code
+bq -q cp -f scratch_david.eez_country_codes  frz-watch-program:vessel_lists.eez_country_codes
+bq -q cp -f scratch_david_mmsi_lists.2015_fishing_vessel_info_v2 frz-watch-program:vessel_lists.2015_fishing_vessel_info_v2
+bq -q cp -f scratch_global_fishing_raster.classifciation_results_all_20170722 frz-watch-program:vessel_lists.classifciation_results_all_20170722
+bq -q cp -f world-fishing-827:Registry_matching_sources.EU_registry_170316 frz-watch-program:vessel_lists.EU_registry_170316 
+bq -q cp -f world-fishing-827:Registry_matching_sources.FFA_11_30_2015 frz-watch-program:vessel_lists.FFA_11_30_2015
+bq -q cp -f world-fishing-827:Registry_matching_sources.ITU_Dec_2015_Fishing frz-watch-program:vessel_lists.ITU_Dec_2015_Fishing
+bq -q cp -f world-fishing-827:Registry_matching_sources.ITU_Dec_2015_Fishing frz-watch-program:vessel_lists.ITU_Dec_2015_Fishing
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2015_all_fishing_v3 frz-watch-program:vessel_lists.2015_all_fishing_v3
+
+
+
+bq -q cp -f scratch_bjorn.2015_combined_fishing gfw-partners:vessel_lists.2015_combined_fishing
+bq -q cp -f scratch_roan.country_code gfw-partners:vessel_lists.country_code
+bq -q cp -f scratch_global_fishing_raster.2015_with_score_and_hours gfw-partners:fishing_hours.2015_with_score_and_hours
+bq -q cp -f scratch_global_fishing_raster.2015_with_score_and_hours_fishing gfw-partners:fishing_hours.2015_with_score_and_hours_fishing
+bq -q cp -f Registry_matching_sources.CLAV_12_14_2015 gfw-partners:vessel_lists.CLAV_12_14_2015 
+bq -q cp -f Registry_matching_sources.CCAMLR_July_2015_with_mmsi gfw-partners:vessel_lists.CCAMLR_July_2015_with_mmsi
+bq -q cp -f CLAV_match_results.v7_results gfw-partners:vessel_lists.CLAV_v7_results
+bq -q cp -f EU_match_results.EU_v2 gfw-partners:vessel_lists.EU_v2
+bq -q cp -f scratch_global_fishing_raster.classification_results_20160506 gfw-partners:vessel_lists.classification_results_20160506
+bq -q cp -f scratch_david_seg_analysis.spoofing_hours_2015 gfw-partners:vessel_lists.spoofing_hours_2015 
+bq -q cp -f Registry_matching_sources.EU_registry_311215 gfw-partners:vessel_lists.EU_registry_311215 
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2012  gfw-partners:vessel_lists.known_likely_fishing_mmsis_2012
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2013  gfw-partners:vessel_lists.known_likely_fishing_mmsis_2013
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2014  gfw-partners:vessel_lists.known_likely_fishing_mmsis_2014
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2015  gfw-partners:vessel_lists.known_likely_fishing_mmsis_2015
+bq -q cp -f scratch_david_mmsi_lists.known_likely_fishing_mmsis_2016  gfw-partners:vessel_lists.known_likely_fishing_mmsis_2016
+bq -q cp -f scratch_david_seg_analysis_715.2012_segments  gfw-partners:segment_analysis.2012_segments
+bq -q cp -f scratch_david_seg_analysis_715.2013_segments  gfw-partners:segment_analysis.2013_segments
+bq -q cp -f scratch_david_seg_analysis_715.2014_segments  gfw-partners:segment_analysis.2014_segments
+bq -q cp -f scratch_david_seg_analysis_715.2015_segments  gfw-partners:segment_analysis.2015_segments
+bq -q cp -f scratch_david_seg_analysis_715.2016_segments  gfw-partners:segment_analysis.2016_segments
+bq -q cp -f scratch_david.country_codes  gfw-partners:vessel_lists.country_code
+bq -q cp -f scratch_david.eez_country_codes  gfw-partners:vessel_lists.eez_country_codes
+bq -q cp -f scratch_david_mmsi_lists.2015_fishing_vessel_info_v2 gfw-partners:vessel_lists.2015_fishing_vessel_info_v2
+bq -q cp -f scratch_global_fishing_raster.classifciation_results_all_20170722 gfw-partners:vessel_lists.classifciation_results_all_20170722
+bq -q cp -f world-fishing-827:Registry_matching_sources.EU_registry_170316 gfw-partners:vessel_lists.EU_registry_170316 
+bq -q cp -f world-fishing-827:Registry_matching_sources.FFA_11_30_2015 gfw-partners:vessel_lists.FFA_11_30_2015
+bq -q cp -f world-fishing-827:Registry_matching_sources.ITU_Dec_2015_Fishing gfw-partners:vessel_lists.ITU_Dec_2015_Fishing
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2015_all_fishing_v3 gfw-partners:vessel_lists.2015_all_fishing_v3
+
+
+

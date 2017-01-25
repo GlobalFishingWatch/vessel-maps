@@ -1,4 +1,11 @@
+.ipynb_checkpoints
 data
 images
 utilities/pipa_paper/venv/
 .idea/
+.DS_Store
+*png
+*.csv
+venv/*
+*.dat
+*.json

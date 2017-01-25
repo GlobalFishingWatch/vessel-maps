@@ -1,0 +1,21 @@
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2012_fishing_vessel_info ucsb-gfw:vessel_lists.2012_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2013_fishing_vessel_info ucsb-gfw:vessel_lists.2013_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2014_fishing_vessel_info ucsb-gfw:vessel_lists.2014_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2015_fishing_vessel_info ucsb-gfw:vessel_lists.2015_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2016_fishing_vessel_info ucsb-gfw:vessel_lists.2016_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2012_fishing_vessel_info frz-watch-program:vessel_lists.2012_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2013_fishing_vessel_info frz-watch-program:vessel_lists.2013_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2014_fishing_vessel_info frz-watch-program:vessel_lists.2014_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2015_fishing_vessel_info frz-watch-program:vessel_lists.2015_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2016_fishing_vessel_info frz-watch-program:vessel_lists.2016_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2012_fishing_vessel_info gfw-partners:vessel_lists.2012_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2013_fishing_vessel_info gfw-partners:vessel_lists.2013_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2014_fishing_vessel_info gfw-partners:vessel_lists.2014_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2015_fishing_vessel_info gfw-partners:vessel_lists.2015_fishing_vessel_info
+bq -q cp -f world-fishing-827:scratch_david_mmsi_lists.2016_fishing_vessel_info gfw-partners:vessel_lists.2016_fishing_vessel_info
+
+
+
+bq -q cp -f world-fishing-827:scratch_david_seg_analysis.good_segments gfw-partners:segment_analysis.good_segments
+bq -q cp -f world-fishing-827:scratch_david_seg_analysis.good_segments frz-watch-program:segment_analysis.good_segments
+bq -q cp -f world-fishing-827:scratch_david_seg_analysis.good_segments ucsb-gfw:segment_analysis.good_segments
